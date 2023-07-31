@@ -1,118 +1,52 @@
 importantWords = confirm(`Tell me three most important words 💚`);
 
-if(importantWords === true){
+if(importantWords){
 
-    firstWord = prompt(`Enter first word`, `i`);
-
-    while(firstWord === null || !firstWord){
-        firstWord = prompt(`Enter first word`);
-    }
-
-    validation = prompt(`
-        Choose one of validations type:
-            1. uppercase
-            2. lowercase
-            3. capitalize
-    `, `1`);
+    countOfWords = 3;
+    wordIndex = 1;
+    finalString = ``;
 
     uppercase = `1`;
     lowercase = `2`;
     capitalize = `3`;
 
-    while(
-        validation == null || 
-        !validation || 
-        (validation != uppercase &&
-        validation != lowercase &&
-        validation != capitalize)){
+    while(wordIndex<=countOfWords){
+        word = prompt(`Enter word #${wordIndex}`);
+        while(word === null || word.replaceAll(` `, ``) === ``){
+            word = prompt(`Enter word #${wordIndex}`);
+        }
 
-        validation = prompt(`
-        Choose one of validations type:
-            1. uppercase
-            2. lowercase
-            3. capitalize
-        `)
+        do{
+            validation = prompt(`
+            Choose one of validations type:
+                1. uppercase
+                2. lowercase
+                3. capitalize
+        `);
+        }while(
+            validation == null
+            || validation.replaceAll(` `,``) === ``
+            || (validation.replaceAll(" ","").toLowerCase() != uppercase 
+            && validation.replaceAll(" ","").toLowerCase() != lowercase 
+            && validation.replaceAll(" ","").toLowerCase() != capitalize));
+
+
+        if(validation === uppercase){
+            word = word.toUpperCase();
+        }else if(validation === lowercase){
+            word = word.toLowerCase();
+        }else if(validation === capitalize){
+            word = word[0].toUpperCase() + word.slice(1).toLowerCase();
+        }
+
+        finalString += word;
+        if(wordIndex === 3){
+            finalString += `!`;
+        }else{
+            finalString += ` `;
+        }
+
+        wordIndex++;
     }
-
-    if(validation === uppercase){
-        firstWord = firstWord.toUpperCase();
-    }else if(validation === lowercase){
-        firstWord = firstWord.toLowerCase();
-    }else if(validation === capitalize){
-        firstWord = firstWord[0].toUpperCase() + firstWord.slice(1).toLowerCase();
-    }
-
-    secondWord = prompt(`Enter second word`, `love`);
-
-    while(secondWord === null || !secondWord){
-        secondWord = prompt(`Enter second word`);
-    }
-    
-    validation = prompt(`
-        Choose one of validations type:
-            1. uppercase
-            2. lowercase
-            3. capitalize
-    `, `2`);
-
-    while(
-        validation == null || 
-        !validation || 
-        (validation != uppercase &&
-        validation != lowercase &&
-        validation != capitalize)){
-
-        validation = prompt(`
-        Choose one of validations type:
-            1. uppercase
-            2. lowercase
-            3. capitalize
-        `)
-    }
-
-    if(validation === uppercase){
-        secondWord = secondWord.toUpperCase();
-    }else if(validation === lowercase){
-        secondWord = secondWord.toLowerCase();
-    }else if(validation === capitalize){
-        secondWord = secondWord[0].toUpperCase() + secondWord.slice(1).toLowerCase();
-    }
-
-    thirdWord = prompt(`Enter third word`, `you`);
-
-    while(thirdWord === null || !thirdWord){
-        thirdWord = prompt(`Enter third word`);
-    }
-
-    validation = prompt(`
-    Choose one of validations type:
-        1. uppercase
-        2. lowercase
-        3. capitalize
-    `, `3`);
-
-    while(
-        validation == null || 
-        !validation || 
-        (validation != uppercase &&
-        validation != lowercase &&
-        validation != capitalize)){
-
-        validation = prompt(`
-        Choose one of validations type:
-            1. uppercase
-            2. lowercase
-            3. capitalize
-        `)
-    }
-
-    if(validation === uppercase){
-        thirdWord = thirdWord.toUpperCase();
-    }else if(validation === lowercase){
-        thirdWord = thirdWord.toLowerCase();
-    }else if(validation === capitalize){
-        thirdWord = thirdWord[0].toUpperCase() + thirdWord.slice(1).toLowerCase();
-    }
-
-    console.log(`${firstWord} ${secondWord} ${thirdWord}!`);
+    console.log(finalString);
 }
